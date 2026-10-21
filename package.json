@@ -26,6 +26,7 @@
   "build": {
     "appId": "org.adventista.bibliahimnarioobs",
     "productName": "Biblia e Himnario OBS",
+    "icon": "public/icon.png",
     "files": [
       "electron-main.js",
       "server.js",
@@ -41,10 +42,10 @@
       "!Instrumental/**/*",
       "!instrumental/**/*",
       "!instrumntal/**/*",
-      "!imagenes/**/*",
-      "!*.png"
+      "!imagenes/**/*"
     ],
     "mac": {
+      "icon": "public/icon.png",
       "category": "public.app-category.utilities",
       "target": [
         "dmg",
@@ -52,6 +53,7 @@
       ]
     },
     "win": {
+      "icon": "public/icon.ico",
       "target": [
         "nsis",
         "portable"

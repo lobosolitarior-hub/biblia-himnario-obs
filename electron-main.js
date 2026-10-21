@@ -19,24 +19,54 @@ if (!gotTheLock) {
   process.exit(0);
 }
 
+// Identificador de modelo de usuario para que Windows muestre el ícono en la barra de tareas
+if (process.platform === 'win32') {
+  app.setAppUserModelId('org.adventista.bibliahimnarioobs');
+}
+
 let tray = null;
 let mainWindow = null;
 let isQuitting = false;
 let serverModule = null;
 
-// Icono PNG 16x16 en base64 para la bandeja del sistema (Windows Tray / Mac Menu Bar)
+// Icono PNG 32x32 en base64 (Biblia abierta + nota musical dorada) para respaldo garantizado
 const TRAY_ICON_BASE64 =
-  'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAWklEQVQ4T2NkoBAwUqifYdQABgZGBgY2BgaG/0g8XAw2AJsB2AwgZiA2AzA14PIwNoMJsRkYGJ7jciM2A4g1gBjD8LkBn4H43IDNDcRmALGG4fIwIbaMAgB5hBMR73qN5AAAAABJRU5ErkJggg==';
+  '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';
+
+function createAppIcon() {
+  const candidates =
+    process.platform === 'win32'
+      ? [
+          path.join(__dirname, 'public', 'icon.ico'),
+          path.join(__dirname, 'public', 'icon.png'),
+          path.join(__dirname, 'public', 'icon-tray.png'),
+        ]
+      : [
+          path.join(__dirname, 'public', 'icon.png'),
+          path.join(__dirname, 'public', 'icon-tray.png'),
+        ];
+
+  for (const candidate of candidates) {
+    try {
+      if (fs.existsSync(candidate)) {
+        const img = nativeImage.createFromPath(candidate);
+        if (!img.isEmpty()) {
+          return img;
+        }
+      }
+    } catch {}
+  }
+  return nativeImage.createFromDataURL(`data:image/png;base64,${TRAY_ICON_BASE64}`);
+}
 
 function createTrayIcon() {
-  const iconPath = path.join(__dirname, 'public', 'icon-tray.png');
+  const baseImg = createAppIcon();
+  const targetSize = process.platform === 'darwin' ? 18 : 16;
   try {
-    const img = nativeImage.createFromPath(iconPath);
-    if (!img.isEmpty()) {
-      return img.resize({ width: 18, height: 18 });
-    }
-  } catch {}
-  return nativeImage.createFromDataURL(`data:image/png;base64,${TRAY_ICON_BASE64}`);
+    return baseImg.resize({ width: targetSize, height: targetSize });
+  } catch {
+    return baseImg;
+  }
 }
 
 function openControlWindow() {
@@ -46,12 +76,15 @@ function openControlWindow() {
     return;
   }
 
+  const appIcon = createAppIcon();
+
   mainWindow = new BrowserWindow({
     width: 420,
     height: 700,
     minWidth: 340,
     minHeight: 480,
     title: 'Biblia e Himnario - Panel OBS (v1.0.1)',
+    icon: appIcon,
     backgroundColor: '#181a20',
     autoHideMenuBar: true,
     webPreferences: {
@@ -59,6 +92,12 @@ function openControlWindow() {
       contextIsolation: true,
     },
   });
+
+  if (process.platform === 'win32' && mainWindow.setIcon) {
+    try {
+      mainWindow.setIcon(appIcon);
+    } catch {}
+  }
 
   const port = (serverModule && serverModule.PORT) || 3000;
   mainWindow.loadURL(`http://localhost:${port}/panel`);
