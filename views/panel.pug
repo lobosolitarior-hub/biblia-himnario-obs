@@ -1,0 +1,232 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body.panel-body
+    header.panel-header
+      .brand#btnObsConfig(
+        data-tooltip="OBS WebSocket (clic para configurar)",
+        title="OBS WebSocket (clic para configurar)"
+      )
+        span#obsStatusDot.obs-mini-dot(
+          class=obsConnected ? 'connected' : 'disconnected'
+        )
+        span.brand-icon 📖🎵
+        .brand-text
+          h1 Biblia e Himnario
+      //- Indicadores de estado de audio (Verde = Local, Azul = Internet)
+      .audio-availability
+        span#badgeCantado.audio-pill.local(data-tooltip="Cantado (Local)", title="Cantado (Local)") 🎤
+        span#badgeInstrumental.audio-pill.local(data-tooltip="Instrumental (Local)", title="Instrumental (Local)") 🎹
+
+    main.panel-main
+      //- =========================================================
+      //- 1. SECCIÓN HIMNARIO
+      //- =========================================================
+      section.card.mini-card
+        label.section-label Himnario Adventista (1-614)
+        .search-row
+          .input-group.number-group
+            label(for="hymnNumberInput") N.º
+            input#hymnNumberInput(
+              type="number",
+              min="1",
+              max="614",
+              placeholder="1-614",
+              autocomplete="off"
+            )
+          .input-group.title-group
+            label(for="hymnSearchInput") Nombre o número del himno
+            .autocomplete-wrapper
+              input#hymnSearchInput(
+                type="text",
+                placeholder="Escribe el nombre o número...",
+                autocomplete="off"
+              )
+              button#btnClearSearch.clear-btn(type="button", title="Limpiar búsqueda", hidden) ✕
+              ul#autocompleteList.autocomplete-list(hidden)
+          button#btnProject.btn-play-inline(
+            type="button",
+            data-tooltip="Proyectar himno",
+            title="Proyectar himno"
+          ) ▶
+          button#btnStop.btn-stop-inline(
+            type="button",
+            disabled,
+            data-tooltip="Detener y regresar escena",
+            title="Detener y regresar escena"
+          ) ⏹
+
+        //- Barra inferior compacta de Himnario
+        .mini-toolbar
+          //- 1. Tipo de proyección: Cantado, Instrumental, Solo letra
+          .mini-group#audioModeGroup
+            button.mini-pill-btn.active(
+              type="button",
+              data-mode="cantado",
+              data-tooltip="Cantado",
+              title="Cantado"
+            ) 🎤
+            button.mini-pill-btn(
+              type="button",
+              data-mode="instrumental",
+              data-tooltip="Instrumental",
+              title="Instrumental"
+            ) 🎹
+            button.mini-pill-btn(
+              type="button",
+              data-mode="letra",
+              data-tooltip="Solo letra",
+              title="Solo letra"
+            ) 📄
+
+          span.mini-sep
+
+          //- 2. Modo de avance: Automático, Manual
+          .mini-group#advanceModeGroup
+            button.mini-pill-btn.active(
+              type="button",
+              data-advance="auto",
+              data-tooltip="Automático",
+              title="Automático"
+            ) ⚡
+            button.mini-pill-btn(
+              type="button",
+              data-advance="manual",
+              data-tooltip="Manual",
+              title="Manual"
+            ) 🖐️
+
+          span.mini-sep
+
+          //- 3. Botones < > (activos solo cuando el modo manual está activado)
+          .mini-group.nav-group
+            button#btnPrevSlide.mini-pill-btn.nav-arrow(
+              type="button",
+              disabled,
+              data-tooltip="Diapositiva anterior",
+              title="Diapositiva anterior"
+            ) &lt;
+            button#btnNextSlide.mini-pill-btn.nav-arrow(
+              type="button",
+              disabled,
+              data-tooltip="Siguiente diapositiva",
+              title="Siguiente diapositiva"
+            ) &gt;
+
+      //- =========================================================
+      //- 2. SECCIÓN SANTA BIBLIA (RVR1960 / DHH)
+      //- =========================================================
+      section.card.mini-card.bible-card
+        .bible-section-head
+          label.section-label Santa Biblia
+          span#bibleChapterLabel.bible-chapter-tag Génesis 1 (RVR1960)
+
+        .search-row.bible-search-row
+          .input-group.title-group
+            .autocomplete-wrapper
+              input#bibleSearchInput(
+                type="text",
+                placeholder="Ej: Génesis 3:20, Éxodo 20:8 o Salmos 23...",
+                autocomplete="off"
+              )
+              button#btnClearBible.clear-btn(type="button", title="Limpiar cita", hidden) ✕
+              ul#bibleAutocompleteList.autocomplete-list(hidden)
+          button#btnBibleProject.btn-play-inline(
+            type="button",
+            data-tooltip="Proyectar versículo",
+            title="Proyectar versículo"
+          ) ▶
+          button#btnBibleStop.btn-stop-inline(
+            type="button",
+            disabled,
+            data-tooltip="Ocultar Biblia y regresar escena",
+            title="Ocultar Biblia y regresar escena"
+          ) ⏹
+
+        //- Barra compacta de Biblia: Versión | Escena (Fondo / Cámara) | < >
+        .mini-toolbar
+          //- 1. Versión de la Biblia
+          .mini-group#bibleVersionGroup
+            button.mini-pill-btn.active(
+              type="button",
+              data-version="RVR1960",
+              data-tooltip="Reina Valera 1960",
+              title="Reina Valera 1960"
+            ) RVR60
+            button.mini-pill-btn(
+              type="button",
+              data-version="DHH",
+              data-tooltip="Dios Habla Hoy",
+              title="Dios Habla Hoy"
+            ) DHH
+
+          span.mini-sep
+
+          //- 2. Escena de destino en OBS: Imagen de fondo vs Cámara
+          .mini-group#bibleSceneGroup
+            button.mini-pill-btn.active(
+              type="button",
+              data-scene="fondo",
+              data-tooltip="Escena Biblia (Fondo)",
+              title="Escena Biblia (Fondo)"
+            ) 🖼️
+            button.mini-pill-btn(
+              type="button",
+              data-scene="camara",
+              data-tooltip="Escena Biblia Cámara",
+              title="Escena Biblia Cámara"
+            ) 🎥
+
+          span.mini-sep
+
+          //- 3. Avanzar / Retroceder versículo (< >)
+          .mini-group.nav-group
+            button#btnPrevVerse.mini-pill-btn.nav-arrow(
+              type="button",
+              data-tooltip="Versículo anterior",
+              title="Versículo anterior"
+            ) &lt;
+            button#btnNextVerse.mini-pill-btn.nav-arrow(
+              type="button",
+              data-tooltip="Siguiente versículo",
+              title="Siguiente versículo"
+            ) &gt;
+
+        //- Lista completa de versículos del capítulo cargado (clic directo para proyectar)
+        ul#bibleVersesList.bible-verses-list
+
+    //- Mini diálogo oculto (al hacer clic en el título para configurar OBS WebSocket y escenas)
+    #obsModal.mini-modal(hidden)
+      form#obsConfigForm.mini-modal-card
+        .mini-modal-head
+          span Conexión OBS WebSocket y Escenas
+          button#btnCloseModal.mini-close-btn(type="button", title="Cerrar") ✕
+        .mini-modal-body
+          .mini-field-row
+            label(for="obsUrlInput") Servidor WS
+            input#obsUrlInput(type="text", placeholder="ws://127.0.0.1:4455", value=obsConfig.url)
+          .mini-field-row
+            label(for="obsPassInput") Contraseña
+            input#obsPassInput(type="password", placeholder="Dejar vacío si no tiene contraseña", value=obsConfig.password)
+          .mini-field-row
+            label(for="obsSceneInput") Esc. Himno
+            input#obsSceneInput(type="text", placeholder="Himnario", value=obsConfig.sceneName)
+          .mini-field-row
+            label(for="obsBibleBgInput") Esc. Biblia
+            input#obsBibleBgInput(type="text", placeholder="Biblia", value=obsConfig.bibleBgSceneName)
+          .mini-field-row
+            label(for="obsBibleCamInput") Esc. Cámara
+            input#obsBibleCamInput(type="text", placeholder="Biblia Camara", value=obsConfig.bibleCamSceneName)
+          .mini-field-row
+            label(for="obsAudioRootInput") Carpeta MP3
+            input#obsAudioRootInput(type="text", placeholder="Carpeta de audios", value=obsConfig.audioRootDir)
+          .mini-modal-actions
+            button#btnOpenAudioFolder.btn-secondary-mini(type="button") 📂 Abrir carpeta MP3
+            button.btn-save-mini(type="submit") Guardar y Conectar
+
+    script(src="/socket.io/socket.io.js")
+    script(src="/js/panel.js")

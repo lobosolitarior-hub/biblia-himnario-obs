@@ -1,0 +1,68 @@
+{
+  "name": "biblia-e-himnario-obs",
+  "productName": "Biblia e Himnario OBS",
+  "version": "1.0.0",
+  "description": "Controlador y proyección en directo de Santa Biblia (RVR1960 / DHH) e Himnario Adventista (614 himnos) para OBS Studio",
+  "author": "Iglesia Adventista",
+  "main": "electron-main.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "app": "electron .",
+    "dist:mac": "electron-builder --mac",
+    "dist:win": "electron-builder --win --x64",
+    "dist:all": "electron-builder --mac --win --x64"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "obs-websocket-js": "^5.0.5",
+    "pug": "^3.0.3",
+    "socket.io": "^4.7.5"
+  },
+  "devDependencies": {
+    "electron": "^31.7.7",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "org.adventista.bibliahimnarioobs",
+    "productName": "Biblia e Himnario OBS",
+    "files": [
+      "electron-main.js",
+      "server.js",
+      "package.json",
+      "views/**/*",
+      "public/**/*",
+      "data/himnos.json",
+      "data/biblia_rvr1960.json",
+      "data/biblia_dhh.json",
+      "!data/config.json",
+      "!Cantado/**/*",
+      "!cantado/**/*",
+      "!Instrumental/**/*",
+      "!instrumental/**/*",
+      "!instrumntal/**/*",
+      "!imagenes/**/*",
+      "!*.png"
+    ],
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "runAfterFinish": true
+    }
+  }
+}

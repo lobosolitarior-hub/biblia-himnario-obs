@@ -1,0 +1,30 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body.projection-body
+    #projectionRoot.projection-stage.hidden
+      .projection-backdrop
+        .projection-header
+          .hymn-meta
+            span#projHymnNumber.proj-badge Himno #1
+            span#projHymnTitle.proj-title Cantad alegres al Señor
+          span#projSlideLabel.proj-verse-tag Título
+
+        .projection-center
+          #projSlideContent.proj-lyrics
+          #projSubtext.proj-subtext
+
+        .projection-footer
+          #projDots.proj-dots
+          .proj-progress-track
+            #projProgressBar.proj-progress-bar
+
+    //- Reproductor de audio integrado en la escena Himnario
+    audio#projectionAudio(preload="auto", crossorigin="anonymous")
+
+    script(src="/socket.io/socket.io.js")
+    script(src="/js/proyeccion.js")

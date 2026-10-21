@@ -1,0 +1,18 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body.bible-projection-body
+    #bibleProjectionRoot.bible-stage.hidden
+      .bible-card-overlay#bibleCardOverlay
+        .bible-header-bar
+          span#bibleRefBadge.bible-ref-badge Éxodo 20:8
+          span#bibleVersionBadge.bible-ver-badge RVR1960
+        .bible-verse-body
+          p#bibleVerseText.bible-verse-text
+
+    script(src="/socket.io/socket.io.js")
+    script(src="/js/biblia.js")

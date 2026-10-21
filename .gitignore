@@ -1,0 +1,21 @@
+# Dependencias de Node
+node_modules/
+
+# Instaladores compilados (se suben a la sección "Releases" de GitHub)
+dist/
+
+# Archivos de audio MP3 (se descargan/copian por separado en cada iglesia)
+Cantado/
+cantado/
+Instrumental/
+instrumental/
+instrumntal/
+
+# Configuración local privada (contiene la contraseña de OBS WebSocket local)
+data/config.json
+
+# Capturas y archivos temporales del sistema
+imagenes/
+*.png
+.DS_Store
+npm-debug.log*
