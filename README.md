@@ -10,8 +10,8 @@ Sistema de control y proyección en directo para **OBS Studio** pensado para igl
 
 1. Ve a la sección **[Releases](../../releases)** de este repositorio en GitHub.
 2. Descarga el instalador para tu sistema:
-   - **Windows:** `Biblia e Himnario OBS Setup 1.0.0.exe` (o la versión portable).
-   - **Mac (macOS):** `Biblia e Himnario OBS-1.0.0-arm64.dmg`.
+   - **Windows:** `Biblia e Himnario OBS Setup 1.0.1.exe` (o la versión portable).
+   - **Mac (macOS):** `Biblia e Himnario OBS-1.0.1-arm64.dmg`.
 3. Abre el programa. Quedará activo en la **bandeja del sistema** (junto al reloj en Windows o en la barra superior en Mac) y se iniciará automáticamente al encender la computadora.
 
 ---

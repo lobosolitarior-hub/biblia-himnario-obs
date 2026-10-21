@@ -1,7 +1,7 @@
 {
   "name": "biblia-e-himnario-obs",
   "productName": "Biblia e Himnario OBS",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Controlador y proyección en directo de Santa Biblia (RVR1960 / DHH) e Himnario Adventista (614 himnos) para OBS Studio",
   "author": "Ing. Rubén Humberto Armendáriz Tamayo <lobosolitarior@gmail.com>",
   "main": "electron-main.js",

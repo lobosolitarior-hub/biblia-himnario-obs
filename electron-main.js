@@ -51,7 +51,7 @@ function openControlWindow() {
     height: 700,
     minWidth: 340,
     minHeight: 480,
-    title: 'Biblia e Himnario - Panel OBS',
+    title: 'Biblia e Himnario - Panel OBS (v1.0.1)',
     backgroundColor: '#181a20',
     autoHideMenuBar: true,
     webPreferences: {
@@ -106,7 +106,7 @@ function rebuildTrayMenu() {
 
   const contextMenu = Menu.buildFromTemplate([
     {
-      label: `🟢 Biblia e Himnario OBS (Puerto ${port})`,
+      label: `🟢 Biblia e Himnario OBS v1.0.1 (Puerto ${port})`,
       enabled: false,
     },
     { type: 'separator' },
