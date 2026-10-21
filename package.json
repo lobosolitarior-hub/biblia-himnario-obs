@@ -60,6 +60,7 @@
       ]
     },
     "nsis": {
+      "include": "public/custom-nsis.nsh",
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,

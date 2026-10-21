@@ -11,9 +11,8 @@ echo.
 echo   NOTA: Tus pistas MP3 en "Documentos\Biblia e Himnario OBS" NO se borraran.
 echo.
 
-echo [1/5] Cerrando procesos en segundo plano de Biblia e Himnario OBS...
-taskkill /F /IM "Biblia e Himnario OBS.exe" /T >nul 2>&1
-timeout /t 2 /nobreak >nul
+echo [1/5] Cerrando procesos en segundo plano (sin bloqueo WMI)...
+powershell -NoProfile -ExecutionPolicy Bypass -Command "Get-Process | Where-Object { $_.ProcessName -like '*Biblia e Himnario*' -or $_.ProcessName -like '*old-uninstaller*' } | Stop-Process -Force -ErrorAction SilentlyContinue"
 
 echo [2/5] Quitando inicio automatico de Windows...
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "electron.app.Biblia e Himnario OBS" /f >nul 2>&1
