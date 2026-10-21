@@ -199,6 +199,12 @@ html(lang="es")
         //- Lista completa de versículos del capítulo cargado (clic directo para proyectar)
         ul#bibleVersesList.bible-verses-list
 
+      //- Barra discreta de autoría en la parte inferior del panel
+      footer.panel-author-bar
+        a.panel-author-link(href="/autor", title="Acerca del Autor y Agradecimientos")
+          span 👨‍💻 Ing. Rubén Humberto Armendáriz Tamayo
+          span.author-link-pill Agradecimientos →
+
     //- Mini diálogo oculto (al hacer clic en el título para configurar OBS WebSocket y escenas)
     #obsModal.mini-modal(hidden)
       form#obsConfigForm.mini-modal-card
@@ -227,6 +233,11 @@ html(lang="es")
           .mini-modal-actions
             button#btnOpenAudioFolder.btn-secondary-mini(type="button") 📂 Abrir carpeta MP3
             button.btn-save-mini(type="submit") Guardar y Conectar
+          .modal-author-credit
+            .modal-author-info
+              strong Ing. Rubén Humberto Armendáriz Tamayo
+              span Ingeniero en Sistemas Computacionales
+            a.modal-author-btn(href="/autor") 🙏 Página del Autor / Agradecer
 
     script(src="/socket.io/socket.io.js")
     script(src="/js/panel.js")

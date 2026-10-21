@@ -69,3 +69,18 @@ npm run app
 npm run dist:mac   # Instalador .dmg para macOS
 npm run dist:win   # Instalador .exe para Windows
 ```
+
+---
+
+## 👨‍💻 Autor y Agradecimientos
+
+Este sistema fue diseñado y desarrollado por:
+
+- **Ing. Rubén Humberto Armendáriz Tamayo**
+- *Ingeniero en Sistemas Computacionales*
+
+> 🙏 **¿Ha sido de bendición este proyecto para tu iglesia?**
+> Este software se comparte de manera totalmente gratuita para apoyar el ministerio de comunicación y transmisión de las congregaciones. Si deseas agradecer o compartir desde qué iglesia lo están utilizando, puedes:
+> - ⭐ Dejar una **estrella (Star)** arriba a la derecha en este repositorio de GitHub.
+> - ✉️ Enviar un mensaje de saludo a: **[lobosolitarior@gmail.com](mailto:lobosolitarior@gmail.com)**
+

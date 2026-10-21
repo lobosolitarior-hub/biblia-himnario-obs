@@ -1,3 +1,10 @@
+/**
+ * ============================================================================
+ *  PROYECCIÓN DE BIBLIA: Biblia e Himnario Adventista para OBS Studio
+ *  AUTOR:                Ing. Rubén Humberto Armendáriz Tamayo
+ *  TÍTULO:               Ingeniero en Sistemas Computacionales
+ * ============================================================================
+ */
 (() => {
   const socket = io();
 

@@ -1,0 +1,42 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Acerca del Autor — Ing. Rubén Humberto Armendáriz Tamayo
+    link(rel="stylesheet", href="/css/style.css")
+  body.author-body
+    main.author-container
+      article.author-card
+        .author-badge-top DESARROLLADOR Y CREADOR DEL SISTEMA
+        .author-avatar 👨‍💻
+        h1.author-name Rubén Humberto Armendáriz Tamayo
+        p.author-degree Ingeniero en Sistemas Computacionales
+
+        .author-divider
+
+        p.author-message
+          | Este sistema de 
+          strong Biblia e Himnario para OBS Studio
+          |  fue diseñado y desarrollado con dedicación para apoyar a los ministerios de comunicación, audio y transmisión de nuestras iglesias.
+
+        .author-thanks-box
+          h2.thanks-title 🙏 ¿Te ha sido de bendición este proyecto?
+          p.thanks-text
+            | Esta herramienta se comparte de manera gratuita para todas las iglesias. Si ha facilitado las transmisiones y el culto en tu congregación, 
+            strong un mensaje de agradecimiento, saber desde qué iglesia lo utilizan o dejar una estrella (⭐) en GitHub
+            |  será de gran alegría y motivación para seguir creando más herramientas.
+
+        .author-actions
+          a.author-btn.primary(
+            href="https://github.com/lobosolitarior-hub/biblia-himnario-obs",
+            target="_blank",
+            rel="noopener noreferrer"
+          ) ⭐ Agradecer o dejar estrella en GitHub
+          a.author-btn.secondary(
+            href="mailto:lobosolitarior@gmail.com?subject=Gracias%20por%20el%20sistema%20Biblia%20e%20Himnario%20OBS"
+          ) ✉️ Enviar un saludo por correo
+          a.author-btn.ghost(href="/panel") ← Volver al Panel de Control
+
+        footer.author-footer
+          span © #{new Date().getFullYear()} Ing. Rubén Humberto Armendáriz Tamayo • Todos los derechos de autoría reservados

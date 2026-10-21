@@ -1,3 +1,12 @@
+/**
+ * ============================================================================
+ *  SISTEMA: Biblia e Himnario Adventista para OBS Studio (Aplicación Tray)
+ *  AUTOR:   Ing. Rubén Humberto Armendáriz Tamayo
+ *  TÍTULO:  Ingeniero en Sistemas Computacionales
+ *  GITHUB:  https://github.com/lobosolitarior-hub/biblia-himnario-obs
+ * ============================================================================
+ */
+
 const { app, BrowserWindow, Tray, Menu, shell, clipboard, dialog, nativeImage } = require('electron');
 const path = require('path');
 
@@ -145,6 +154,11 @@ function rebuildTrayMenu() {
         });
         rebuildTrayMenu();
       },
+    },
+    { type: 'separator' },
+    {
+      label: '👨‍💻 Autor: Ing. Rubén H. Armendáriz Tamayo (Agradecimientos)',
+      click: () => shell.openExternal(`http://localhost:${port}/autor`),
     },
     { type: 'separator' },
     {

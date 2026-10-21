@@ -1,3 +1,12 @@
+/**
+ * ============================================================================
+ *  SISTEMA: Biblia e Himnario Adventista para OBS Studio
+ *  AUTOR:   Ing. Rubén Humberto Armendáriz Tamayo
+ *  TÍTULO:  Ingeniero en Sistemas Computacionales
+ *  GITHUB:  https://github.com/lobosolitarior-hub/biblia-himnario-obs
+ * ============================================================================
+ */
+
 const express = require('express');
 const http = require('http');
 const path = require('path');
@@ -706,6 +715,12 @@ app.get(['/biblia', '/proyeccion-biblia'], (req, res) => {
   });
 });
 
+app.get(['/autor', '/creditos'], (req, res) => {
+  res.render('autor', {
+    title: 'Acerca del Autor — Ing. Rubén Humberto Armendáriz Tamayo',
+  });
+});
+
 // API REST para Biblia (RVR1960 y DHH)
 app.get('/api/biblia/libros', (req, res) => {
   res.json(bibleBooksIndex);
@@ -1102,9 +1117,11 @@ server.on('error', (err) => {
 server.listen(PORT, () => {
   console.log(`\n========================================================`);
   console.log(`📖🎵 Biblia e Himnario OBS listo en http://localhost:${PORT}`);
+  console.log(`   • Autor: Ing. Rubén Humberto Armendáriz Tamayo (ISC)`);
   console.log(`   • Panel de Control (Dock OBS): http://localhost:${PORT}/panel`);
   console.log(`   • Fuente Navegador Himnario: http://localhost:${PORT}/proyeccion`);
   console.log(`   • Fuente Navegador Biblia:   http://localhost:${PORT}/biblia`);
+  console.log(`   • Página del Autor:          http://localhost:${PORT}/autor`);
   console.log(`   • Carpeta de Audios MP3:     ${obsConfig.audioRootDir || DEFAULT_USER_AUDIO_ROOT}`);
   console.log(`========================================================\n`);
 });
