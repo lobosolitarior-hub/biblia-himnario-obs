@@ -9,6 +9,8 @@
 
 const { app, BrowserWindow, Tray, Menu, shell, clipboard, dialog, nativeImage } = require('electron');
 const path = require('path');
+const fs = require('fs');
+const { spawn } = require('child_process');
 
 // Evitar que se abran dos instancias al mismo tiempo
 const gotTheLock = app.requestSingleInstanceLock();
@@ -160,12 +162,51 @@ function rebuildTrayMenu() {
       label: '👨‍💻 Autor: Ing. Rubén H. Armendáriz Tamayo (Agradecimientos)',
       click: () => shell.openExternal(`http://localhost:${port}/autor`),
     },
+    ...(process.platform === 'win32'
+      ? [
+          { type: 'separator' },
+          {
+            label: '🗑️ Desinstalar Biblia e Himnario OBS...',
+            click: () => {
+              const choice = dialog.showMessageBoxSync({
+                type: 'warning',
+                buttons: ['Cancelar', 'Sí, desinstalar'],
+                defaultId: 0,
+                cancelId: 0,
+                title: 'Desinstalar Biblia e Himnario OBS',
+                message: '¿Deseas cerrar y desinstalar Biblia e Himnario OBS?',
+                detail: 'Tus carpetas de pistas MP3 (Cantado / Instrumental) en Documentos NO se borrarán.',
+              });
+              if (choice === 1) {
+                try {
+                  app.setLoginItemSettings({ openAtLogin: false });
+                  const installDir = path.dirname(process.execPath);
+                  const uninstallerPath = path.join(installDir, 'Uninstall Biblia e Himnario OBS.exe');
+                  if (fs.existsSync(uninstallerPath)) {
+                    const child = spawn(uninstallerPath, [], {
+                      detached: true,
+                      stdio: 'ignore',
+                    });
+                    child.unref();
+                  } else {
+                    shell.openExternal('ms-settings:appsfeatures');
+                  }
+                } catch {}
+                isQuitting = true;
+                if (tray) tray.destroy();
+                app.exit(0);
+              }
+            },
+          },
+        ]
+      : []),
     { type: 'separator' },
     {
       label: '❌ Detener servidor y salir',
       click: () => {
         isQuitting = true;
-        app.quit();
+        if (tray) tray.destroy();
+        app.exit(0);
       },
     },
   ]);
@@ -185,14 +226,17 @@ app.whenReady().then(() => {
 
   serverModule = require('./server.js');
 
-  // Activar auto-arranque al encender la computadora si está empaquetado
+  // Activar auto-arranque solo la primera vez que se instala, respetando si el usuario lo desactiva después
   if (app.isPackaged) {
-    const currentLogin = app.getLoginItemSettings();
-    if (currentLogin.openAtLogin === false && !process.env.SKIP_DEFAULT_AUTOSTART) {
+    const autoStartFlagFile = path.join(app.getPath('userData'), 'autostart-initialized.json');
+    if (!fs.existsSync(autoStartFlagFile) && !process.env.SKIP_DEFAULT_AUTOSTART) {
       app.setLoginItemSettings({
         openAtLogin: true,
         openAsHidden: true,
       });
+      try {
+        fs.writeFileSync(autoStartFlagFile, JSON.stringify({ initialized: true }), 'utf8');
+      } catch {}
     }
   }
 
